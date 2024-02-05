@@ -1,0 +1,60 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5071d829-5473-4008-9b7c-fb5999c761cf}</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <StartupFile>samples\01. 로그인.py</StartupFile>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <Name>myPkg</Name>
+    <RootNamespace>myPkg</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="LICENSE" />
+    <Content Include="pyproject.toml" />
+    <Content Include="README.md" />
+    <Compile Include="samples\03. 주식전종목조회.py" />
+    <Compile Include="samples\08. 지수선물마스터조회.py" />
+    <Compile Include="samples\11. 서버저장조건 실시간검색.py" />
+    <Compile Include="samples\10. 서버저장조건 리스트조회.py" />
+    <Compile Include="samples\app_keys.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="samples\" />
+    <Folder Include="src\ebest\" />
+    <Folder Include="src\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="src\ebest\code_realtime_account.py" />
+    <Compile Include="src\ebest\OpenApi.py" />
+    <Compile Include="src\ebest\tr_code_to_path.py" />
+    <Compile Include="src\ebest\__init__.py" />
+    <Compile Include="samples\07. 계좌예수금조회.py" />
+    <Compile Include="samples\21. 웹소켓 실시간 체결시세.py" />
+    <Compile Include="samples\06. 주식차트 -연속조회.py" />
+    <Compile Include="samples\05. 주식차트.py" />
+    <Compile Include="samples\04. 주식현재가.py" />
+    <Compile Include="samples\02. 전체업종.py" />
+    <Content Include="samples\01. 로그인.py" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
+  <!-- Uncomment the CoreCompile target to enable the Build command in
+       Visual Studio and specify your pre- and post-build commands in
+       the BeforeBuild and AfterBuild targets below. -->
+  <!--<Target Name="CoreCompile" />-->
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+</Project>

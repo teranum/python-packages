@@ -1,0 +1,30 @@
+https://packaging.python.org/en/latest/tutorials/packaging-projects/
+
+
+1. only first time
+py -m pip install --upgrade pip
+py -m pip install --upgrade build
+py -m pip install --upgrade twine
+
+
+2. build
+py -m build
+
+
+3. test install
+py -m pip install dist/*
+
+
+4. test uninstall
+py -m pip uninstall package_name
+
+
+5. upload to pypi
+py -m twine upload dist/*
+	UserName: __token__
+	Password: pypi-api-token
+	
+
+6. install from pypi
+pip install package_name
+```
