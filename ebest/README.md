@@ -102,12 +102,12 @@ asyncio.run(main())
     else:
         print("실시간검색 등록성공")
         await api.add_realtime("AFR", sAlertNum) # 실시간검색 등록
-        await asyncio.sleep(3600) # 1시간동안 유효, 후에 중지
+        await asyncio.sleep(60) # 60초동안 유효, 후에 중지
         await api.remove_realtime("AFR", sAlertNum) # 실시간검색 중지
 
 def on_realtime(api:ebest.OpenApi, trcode, key, realtimedata):
     if trcode == "AFR":
-        print(f"실시간조건검색 received: {trcode}, {key}, {realtimedata}")
+        print(f"실시간조건검색: {trcode}, {key}, {realtimedata}")
 
 ```
 
@@ -124,6 +124,6 @@ def on_realtime(api:ebest.OpenApi, trcode, key, realtimedata):
 
 def on_realtime(api:ebest.OpenApi, trcode, key, realtimedata):
     if trcode == "S3_":
-        print(f"체결시세 received: {trcode}, {key}, {realtimedata}")
+        print(f"체결시세: {trcode}, {key}, {realtimedata}")
 
 ```
