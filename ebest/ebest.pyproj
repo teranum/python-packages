@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{5071d829-5473-4008-9b7c-fb5999c761cf}</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>samples\01. 로그인.py</StartupFile>
+    <StartupFile>samples\09. 거래대금상위.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -25,8 +25,10 @@
     <Content Include="pyproject.toml" />
     <Content Include="README.md" />
     <Compile Include="samples\03. 주식전종목조회.py" />
+    <Compile Include="samples\09. 거래대금상위.py" />
     <Compile Include="samples\08. 지수선물마스터조회.py" />
-    <Compile Include="samples\11. 서버저장조건 실시간검색.py" />
+    <Compile Include="samples\12. 서버저장조건 실시간검색.py" />
+    <Compile Include="samples\11. 서버저장조건 조건검색.py" />
     <Compile Include="samples\10. 서버저장조건 리스트조회.py" />
     <Compile Include="samples\app_keys.py" />
   </ItemGroup>

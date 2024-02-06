@@ -1,6 +1,6 @@
 ﻿import asyncio
 import ebest
-from app_keys import appkey, appsecretkey # app_keys.py 파일에 appkey, appsecretkey 변수를 정의하고 사용하세요
+from app_keys import appkey, appsecretkey, user_id # app_keys.py 파일에 appkey, appsecretkey, user_id 변수를 정의하고 사용하세요
 
 async def main():
     api=ebest.OpenApi()
@@ -8,7 +8,7 @@ async def main():
     
     request = {
         "t1866InBlock": {
-            "user_id": "abcdefgh", # 사용자ID 8자리
+            "user_id": user_id, # 사용자ID 8자리
             "gb": "0", # 0 : 그룹+조건리스트 조회, 1 : 그룹리스트조회, 2 : 그룹명에 속한 조건리스트조회
             "group_name": "",
             "cont": "0",

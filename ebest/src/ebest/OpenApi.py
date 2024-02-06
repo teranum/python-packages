@@ -246,7 +246,8 @@ class OpenApi:
                         rsp_msg = header.get("rsp_msg", None);
                         if rsp_msg != None:
                             self._last_message = ""
-                            await self._inner_on_mesage(f"{tr_cd}: {rsp_msg}");
+                            tr_type = header.get("tr_type", None);
+                            await self._inner_on_mesage(f"{tr_cd}({tr_type}): {rsp_msg}");
                         body = jsondata.get("body", None);
                         tr_key = header.get("tr_key", None);
                         if body != None and tr_key != None:

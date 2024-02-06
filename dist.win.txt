@@ -12,11 +12,11 @@ py -m build
 
 
 3. test install
-py -m pip install dist/*
+pip install dist/*
 
 
 4. test uninstall
-py -m pip uninstall package_name
+pip uninstall package_name
 
 
 5. upload to pypi
