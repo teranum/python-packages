@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{5071d829-5473-4008-9b7c-fb5999c761cf}</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>samples\01. 로그인.py</StartupFile>
+    <StartupFile>samples\22. 국내선물-실시간시세.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -28,6 +28,7 @@
     <Compile Include="src\ebest\OpenApi.py" />
     <Compile Include="src\ebest\tr_code_to_path.py" />
     <Compile Include="src\ebest\__init__.py" />
+    <Content Include="samples\22. 국내선물-실시간시세.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="samples\" />
