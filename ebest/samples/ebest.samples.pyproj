@@ -5,7 +5,7 @@
     <ProjectGuid>{62e6b338-392f-4ff6-95d0-dd76dba90774}</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>22. 국내선물-실시간시세.py</StartupFile>
+    <StartupFile>31. qt-주식정보조회.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -22,6 +22,8 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="31. qt-주식정보조회.py" />
+    <Compile Include="app_keys.py" />
     <Compile Include="01. 로그인.py" />
     <Compile Include="02. 전체업종.py" />
     <Compile Include="03. 주식전종목조회.py" />
@@ -37,7 +39,6 @@
     <Compile Include="13. 조건검색-텔레그램 전송.py" />
     <Compile Include="21. 웹소켓 실시간 체결시세.py" />
     <Compile Include="22. 국내선물-실시간시세.py" />
-    <Compile Include="app_keys.py" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
