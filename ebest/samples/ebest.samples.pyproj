@@ -5,7 +5,7 @@
     <ProjectGuid>{62e6b338-392f-4ff6-95d0-dd76dba90774}</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>31. qt-주식정보조회.py</StartupFile>
+    <StartupFile>32. qt-주식계좌조회.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -22,6 +22,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="32. qt-주식계좌조회.py" />
     <Compile Include="31. qt-주식정보조회.py" />
     <Compile Include="app_keys.py" />
     <Compile Include="01. 로그인.py" />
