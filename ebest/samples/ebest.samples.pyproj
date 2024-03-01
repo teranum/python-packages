@@ -22,6 +22,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="00. 사용방법.py" />
     <Compile Include="32. qt-주식계좌조회.py" />
     <Compile Include="31. qt-주식정보조회.py" />
     <Compile Include="app_keys.py" />
