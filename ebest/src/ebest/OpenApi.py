@@ -237,16 +237,15 @@ class OpenApi:
                 header = jsondata.get("header", None);
                 if header != None:
                     tr_cd = header.get("tr_cd", None);
-                    if tr_cd != None:
-                        rsp_msg = header.get("rsp_msg", None);
-                        if rsp_msg != None:
-                            self._last_message = ""
-                            tr_type = header.get("tr_type", None);
-                            await self._inner_on_mesage(f"{tr_cd}({tr_type}): {rsp_msg}");
-                        body = jsondata.get("body", None);
-                        tr_key = header.get("tr_key", None);
-                        if body != None and tr_key != None:
-                            await self._inner_on_realtime(tr_cd, tr_key, body)
+                    rsp_msg = header.get("rsp_msg", None);
+                    if rsp_msg != None:
+                        self._last_message = ""
+                        tr_type = header.get("tr_type", None);
+                        await self._inner_on_mesage(f"{tr_cd}({tr_type}): {rsp_msg}");
+                    body = jsondata.get("body", None);
+                    tr_key = header.get("tr_key", None);
+                    if body != None:
+                        await self._inner_on_realtime(tr_cd, tr_key, body)
             elif msg.type == aiohttp.WSMsgType.CLOSED:
                 self._last_message = msg;
                 await self._inner_on_mesage(f"websocket closed. {msg}");

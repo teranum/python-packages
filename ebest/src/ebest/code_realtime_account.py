@@ -1,4 +1,5 @@
 ﻿code_realtime_account = [
+    "SC0",
     "SC1",
     "SC2",
     "SC3",
