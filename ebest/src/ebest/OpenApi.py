@@ -138,18 +138,13 @@ class OpenApi:
         self._connected = True;
         
         # 모의투자인지 실투자인지 구분한다.
-        CSPAQ12300 = dict();
-        CSPAQ12300['CSPAQ12300InBlock1'] = {
-            "BalCreTp":"0",
-            "CmsnAppTpCode":"0",
-            "D2balBaseQryTp":"0",
-            "UprcTpCode":"0",
-        };
+        FOCCQ33600 = dict();
+        FOCCQ33600['FOCCQ33600InBlock1'] = {};
         
-        response = await self.request("CSPAQ12300", CSPAQ12300);
+        response = await self.request("FOCCQ33600", FOCCQ33600);
         if not response :
             self._connected = False;
-            self._last_message = "Failed to require CSPAQ12300";
+            self._last_message = "Failed to require FOCCQ33600";
             await httpclient.close();
             return False;
     
