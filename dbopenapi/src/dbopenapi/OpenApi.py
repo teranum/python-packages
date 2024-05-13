@@ -5,11 +5,11 @@ from dbopenapi.tr_code_to_path import tr_code_to_path
 from dbopenapi.code_realtime_account import code_realtime_account
 
 BASE_URL = "https://openapi.db-fi.com:8443"
-WSS_URL_REAL = "wss://openapi.db-fi.com:7070"
-WSS_URL_SIMULATION = "wss://openapi.db-fi.com:17070"
+WSS_URL_REAL = "wss://openapi.db-fi.com:7070/websocket"
+WSS_URL_SIMULATION = "wss://openapi.db-fi.com:17070/websocket"
 
 #해외선물옵션
-WSS_URL_REAL_overseas_future = "wss://openapi.db-fi.com:7071"
+WSS_URL_REAL_overseas_future = "wss://openapi.db-fi.com:7071/websocket"
 
 class ResponseValue:
     def __init__(
@@ -68,6 +68,11 @@ class OpenApi:
         return self._last_message
 
     @property
+    def access_token(self) -> str:
+        """access_token 당일 재 로그인에 이용"""
+        return self._access_token
+
+    @property
     def mac_address(self) -> str:
         """법인인 경우 필수 세팅"""
         return self._mac_address
@@ -109,15 +114,13 @@ class OpenApi:
 
     async def login(self, appkey:str, appsecretkey:str
                     ,*
-                    , enable_wss:bool=True
                     , wss_domain:str=None
-                    , access_token:str='') -> bool:
+                    , access_token:str=None) -> bool:
         '''
         로그인 요청
         appkey: 앱키
         appsecretkey: 앱시크릿키
         *
-        enable_wss: 웹소켓 연결허용(기본값: True), False로 설정하면 웹소켓 연결을 하지 않음
         wss_domain: 웹소켓 도메인(해외선물옵션인 경우에만 설정, wss://openapi.db-fi.com:7071 으로 설정)
         access_token: 토큰(기본값: ''), 토큰이 있는 경우에는 토큰을 사용하고, 없는 경우에는 새로 토큰을 가져옴
         return: True: 성공, False: 실패, 실패시 last_message에 실패사유가 저장됨
@@ -126,14 +129,14 @@ class OpenApi:
             self._last_message = "aleady connected";
             return True;
         
-        if appkey == "" or appsecretkey == "":
-            self._last_message = "appkey or appsecretkey is empty";
-            return False;
-    
-        # 토큰 가져오기
         timeout = aiohttp.ClientTimeout(total=10) # 10초 타임아웃
         httpclient = aiohttp.ClientSession(timeout=timeout);
-        if access_token == '':
+        if access_token is None or access_token == '':
+            # 토큰 가져오기
+            if appkey == "" or appsecretkey == "":
+                self._last_message = "appkey or appsecretkey is empty";
+                return False;
+    
             token_response = await httpclient.post(BASE_URL + "/oauth2/token"
                         , data={'grant_type': 'client_credentials', 'appkey': appkey, 'appsecretkey': appsecretkey, 'scope': 'oob'}
                         );
@@ -168,23 +171,22 @@ class OpenApi:
             self._is_simulation = True;
 
         # 웹소켓 연결
-        if enable_wss:
-            if not wss_domain:
-                wss_domain = WSS_URL_SIMULATION if self._is_simulation else WSS_URL_REAL;
-            self._connected = False;
-            try:
-                websocket = await  httpclient.ws_connect(wss_domain)
-                self._connected = not websocket.closed;
-            except :
-                pass
+        if not wss_domain:
+            wss_domain = WSS_URL_SIMULATION if self._is_simulation else WSS_URL_REAL;
+        self._connected = False;
+        try:
+            websocket = await  httpclient.ws_connect(wss_domain)
+            self._connected = not websocket.closed;
+        except :
+            pass
     
-            if not self._connected:
-                await httpclient.close();
-                self._last_message = "websocket connection failed.";
-                return False;
+        if not self._connected:
+            await httpclient.close();
+            self._last_message = "websocket connection failed.";
+            return False;
     
-            self._websocket = websocket;
-            asyncio.create_task(self._websocket_listen());
+        self._websocket = websocket;
+        asyncio.create_task(self._websocket_listen());
         
         return True;
 
