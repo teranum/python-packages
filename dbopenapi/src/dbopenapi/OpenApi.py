@@ -69,7 +69,10 @@ class OpenApi:
 
     @property
     def access_token(self) -> str:
-        """access_token 당일 재 로그인에 이용"""
+        """access_token 당일 재 로그인에 이용
+
+        A readonly property.
+        """
         return self._access_token
 
     @property
