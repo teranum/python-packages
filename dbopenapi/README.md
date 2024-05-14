@@ -1,6 +1,6 @@
-﻿# ebest Package
+﻿# DB증권 OpenApi Package
 
-This is a simple package for eBEST OpenApi.
+This is a simple package for DB RestAPI version.
 
 ## Installation
 
