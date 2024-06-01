@@ -4,9 +4,15 @@ import json
 from ebest.tr_code_to_path import tr_code_to_path
 from ebest.code_realtime_account import code_realtime_account
 
-BASE_URL = "https://openapi.ebestsec.co.kr:8080"
-WSS_URL_REAL = "wss://openapi.ebestsec.co.kr:9443/websocket"
-WSS_URL_SIMULATION = "wss://openapi.ebestsec.co.kr:29443/websocket"
+# BASE_URL = "https://openapi.ebestsec.co.kr:8080"
+# WSS_URL_REAL = "wss://openapi.ebestsec.co.kr:9443/websocket"
+# WSS_URL_SIMULATION = "wss://openapi.ebestsec.co.kr:29443/websocket"
+
+# 2024-06-01. 이베스트증권에서 LS증권으로 변경됨.
+BASE_URL = "https://openapi.ls-sec.co.kr:8080"
+WSS_URL_REAL = "wss://openapi.ls-sec.co.kr:9443/websocket"
+WSS_URL_SIMULATION = "wss://openapi.ls-sec.co.kr:29443/websocket"
+
 
 class ResponseValue:
     def __init__(

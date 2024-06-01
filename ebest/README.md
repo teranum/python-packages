@@ -1,6 +1,7 @@
 ﻿# ebest Package
 
 This is a simple package for eBEST OpenApi.
+이베스트증권에서 LS증권으로 사명변경 (2024.06.01), 버젼1.0.0부터 LS증권 OpenApi를 지원합니다.
 
 ## Installation
 
