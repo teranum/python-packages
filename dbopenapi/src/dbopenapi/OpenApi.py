@@ -111,20 +111,20 @@ class OpenApi:
             await self._websocket.close()
         if self._http and not self._http.closed:
             await self._http.close()
+        self._websocket = None
+        self._http = None
 
     async def login(self, appkey:str, appsecretkey:str
                     ,*
-                    , is_simulation:bool=False
-                    , wss_domain:str=''
-                    , access_token:str='') -> bool:
+                    , access_token:str=''
+                    , wss_domain:str='') -> bool:
         '''
         로그인 요청 (모의투자인 경우에는 is_simulation을 True로 설정, 해외선물옵션인 경우에는 wss_domain을 dbopenapi.WSS_URL_GLOBAL 로 설정)
         appkey: 앱키
         appsecretkey: 앱시크릿키
         *
-        is_simulation: 모의투자 여부(기본값: False)
-        wss_domain: 웹소켓 도메인(해외선물옵션인 경우에만 설정, dbopenapi.WSS_URL_GLOBAL 으로 설정)
         access_token: 토큰(기본값: ''), 토큰이 있는 경우에는 토큰을 사용하고, 없는 경우에는 새로 토큰을 가져옴
+        wss_domain: 웹소켓 도메인(해외선물옵션인 경우에만 설정, dbopenapi.WSS_URL_GLOBAL 으로 설정)
         return: True: 성공, False: 실패, 실패시 last_message에 실패사유가 저장됨
         '''
         if self._connected :
@@ -160,38 +160,44 @@ class OpenApi:
         self._connected = True
         
         # 모의투자인지 실투자인지 구분한다.
-        # request = dict()
-        # response = await self.request('CSPEQ00400', request)
-        # if not response :
-        #     self._connected = False
-        #     self._last_message = 'Failed to require CSPEQ00400'
-        #     await httpclient.close()
-        #     return False
+        FOCCQ10800 = dict();
+        FOCCQ10800['In'] = {
+            'IsuNo': '',
+            'BnsDt': '',
+            };
+        response = await self.request('FOCCQ10800', FOCCQ10800)
+        if not response :
+            self._last_message = 'Failed to require FOCCQ10800'
+            await self.close()
+            return False
     
-        # rsp_msg:str = response.body['rsp_msg']
-        # if rsp_msg.__contains__('모의투자'):
-        #     self._is_simulation = True
-
-        self._is_simulation = is_simulation
+        rsp_msg:str = response.body['rsp_msg']
+        self._is_simulation = rsp_msg.__contains__('모의투자')
 
         # 웹소켓 연결
         if wss_domain == '':
             wss_domain = WSS_URL_SIMULATION if self._is_simulation else WSS_URL_REAL
+
         self._connected = False
         try:
-            websocket = await  httpclient.ws_connect(wss_domain + '/websocket')
+            websocket = await  self._http.ws_connect(wss_domain + '/websocket')
             self._connected = not websocket.closed
+
+            if self._connected:
+                self._websocket = websocket
+                asyncio.create_task(self._websocket_listen())
+        
+                # 웹소켓 더미요청
+                await self.add_realtime('9999', '9999')
+
         except :
             pass
     
         if not self._connected:
-            await httpclient.close()
             self._last_message = 'websocket connection failed.'
+            await self.close()
             return False
     
-        self._websocket = websocket
-        asyncio.create_task(self._websocket_listen())
-        
         return True
 
     async def request(self, tr_cd:str, data:dict
@@ -273,6 +279,8 @@ class OpenApi:
                 header = jsondata.get('header', None)
                 if header is not None:
                     tr_cd = header.get('tr_cd', None)
+                    if tr_cd and tr_cd == '9999': # 더미요청은 무시
+                        continue
                     rsp_msg = header.get('rsp_msg', None)
                     if rsp_msg is not None:
                         self._last_message = ''

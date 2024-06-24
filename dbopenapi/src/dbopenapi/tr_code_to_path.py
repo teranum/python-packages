@@ -8,7 +8,7 @@
     'CSPAQ03420' : '/api/v1/trading/kr-stock/inquiry/balance', # 주식잔고조회
     'CDPCQ00100' : '/api/v1/trading/kr-stock/inquiry/acnt-deposit', # 계좌예수금조회
     'CSPEQ00400' : '/api/v1/trading/kr-stock/inquiry/daliy-trade-report', # 일자별매매내역 ...
-    'FOCCQ10800' : 'api/v1/trading/kr-stock/inquiry/rdterm-ernrate', # 임의기간수익률집계
+    'FOCCQ10800' : '/api/v1/trading/kr-stock/inquiry/rdterm-ernrate', # 임의기간수익률집계
     'CSPAQ07800' : '/api/v1/trading/kr-stock/inquiry/stock-ernrate', # 종목별수익률조회
     'CSPAQ00600' : '/api/v1/trading/kr-stock/inquiry/able-crdlimit', # 계좌별신용한도조회
     'CSPAQ09400' : '/api/v1/trading/kr-stock/inquiry/able-crdrepayment', # 신용상환가능총수량조회
