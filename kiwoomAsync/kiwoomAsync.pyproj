@@ -1,0 +1,64 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>7ecdf082-cd79-47e1-8087-b122f33e88ed</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <StartupFile>samples\01. 로그인_Console.py</StartupFile>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <Name>kiwoomAsync</Name>
+    <RootNamespace>kiwoomAsync</RootNamespace>
+    <InterpreterId>MSBuild|env|$(MSBuildProjectFullPath)</InterpreterId>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="LICENSE" />
+    <Content Include="pyproject.toml" />
+    <Content Include="README.md" />
+    <Content Include="samples\01. 로그인_Console.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="samples\" />
+    <Folder Include="src\" />
+    <Folder Include="src\kiwoomAsync\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="src\kiwoomAsync\async_api.py" />
+    <Compile Include="src\kiwoomAsync\kf_dispatch.py" />
+    <Compile Include="src\kiwoomAsync\kh_dispatch.py" />
+    <Compile Include="src\kiwoomAsync\models.py" />
+    <Compile Include="src\kiwoomAsync\__init__.py" />
+    <Compile Include="samples\00. 사용방법.py" />
+    <Compile Include="samples\01. 로그인_QtWindow.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Interpreter Include="env\">
+      <Id>env</Id>
+      <Version>0.0</Version>
+      <Description>env (Python 3.12 (32-bit))</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
+      <Architecture>X86</Architecture>
+    </Interpreter>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
+  <!-- Uncomment the CoreCompile target to enable the Build command in
+       Visual Studio and specify your pre- and post-build commands in
+       the BeforeBuild and AfterBuild targets below. -->
+  <!--<Target Name="CoreCompile" />-->
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+</Project>

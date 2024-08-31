@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
+# 17
 VisualStudioVersion = 17.9.34526.213
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0C6B6CD5-10E6-4F40-9230-955B05BF1E12}"
@@ -16,6 +16,8 @@ Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "ebest", "ebest\ebest.pyproj
 EndProject
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "dbopenapi", "dbopenapi\dbopenapi.pyproj", "{11058B20-6097-479D-91BD-04B5A71E8C58}"
 EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "kiwoomAsync", "kiwoomAsync\kiwoomAsync.pyproj", "{7ECDF082-CD79-47E1-8087-B122F33E88ED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +28,8 @@ Global
 		{5071D829-5473-4008-9B7C-FB5999C761CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{11058B20-6097-479D-91BD-04B5A71E8C58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{11058B20-6097-479D-91BD-04B5A71E8C58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7ECDF082-CD79-47E1-8087-B122F33E88ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7ECDF082-CD79-47E1-8087-B122F33E88ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
