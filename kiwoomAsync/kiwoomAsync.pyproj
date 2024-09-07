@@ -4,7 +4,8 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>7ecdf082-cd79-47e1-8087-b122f33e88ed</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>samples\01. 로그인_Console.py</StartupFile>
+    <StartupFile>
+    </StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -25,10 +26,8 @@
     <Content Include="LICENSE" />
     <Content Include="pyproject.toml" />
     <Content Include="README.md" />
-    <Content Include="samples\01. 로그인_Console.py" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="samples\" />
     <Folder Include="src\" />
     <Folder Include="src\kiwoomAsync\" />
   </ItemGroup>
@@ -38,8 +37,6 @@
     <Compile Include="src\kiwoomAsync\kh_dispatch.py" />
     <Compile Include="src\kiwoomAsync\models.py" />
     <Compile Include="src\kiwoomAsync\__init__.py" />
-    <Compile Include="samples\00. 사용방법.py" />
-    <Compile Include="samples\01. 로그인_QtWindow.py" />
   </ItemGroup>
   <ItemGroup>
     <Interpreter Include="env\">
