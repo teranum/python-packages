@@ -1,32 +1,32 @@
-class ResponseData:
+ï»¿class ResponseData:
     '''
-    RequestTrAsync ¿äÃ» ÀÀ´ä Å¬·¡½º
+    RequestTrAsync ìš”ì²­ ì‘ë‹µ í´ëž˜ìŠ¤
     '''
 
     result_code = 0
-    ''' °á°ú ÄÚµå, 0 - ¼º°ø, ±×¿Ü - ½ÇÆÐ, ¿À·ù¸Þ½ÃÁö´Â msg'''
+    ''' ê²°ê³¼ ì½”ë“œ, 0 - ì„±ê³µ, ê·¸ì™¸ - ì‹¤íŒ¨, ì˜¤ë¥˜ë©”ì‹œì§€ëŠ” msg'''
 
     msg = ''
-    ''' ¿¡·¯¸Þ½ÃÁö '''
+    ''' ì—ëŸ¬ë©”ì‹œì§€ '''
 
     tr_cd = ''
-    ''' TR ÄÚµå '''
+    ''' TR ì½”ë“œ '''
 
     single_datas = []
-    ''' ´ÜÀÏ µ¥ÀÌÅÍ ¸®½ºÆ® '''
+    ''' ë‹¨ì¼ ë°ì´í„° ë¦¬ìŠ¤íŠ¸ '''
 
     multi_datas = []
-    ''' ´ÙÁß µ¥ÀÌÅÍ(2Â÷¿ø ¸®½ºÆ®) '''
+    ''' ë‹¤ì¤‘ ë°ì´í„°(2ì°¨ì› ë¦¬ìŠ¤íŠ¸) '''
 
     cont_key = ''
-    ''' ¿¬¼ÓÅ° '''
+    ''' ì—°ì†í‚¤ '''
 
 
     in_singles = []
-    ''' ÀÔ·ÂµÈ ´ÜÀÏ µ¥ÀÌÅÍ ¸®½ºÆ® '''
+    ''' ìž…ë ¥ëœ ë‹¨ì¼ ë°ì´í„° ë¦¬ìŠ¤íŠ¸ '''
 
     in_multis = []
-    ''' ÀÔ·ÂµÈ ´ÙÁß µ¥ÀÌÅÍ ¸®½ºÆ® '''
+    ''' ìž…ë ¥ëœ ë‹¤ì¤‘ ë°ì´í„° ë¦¬ìŠ¤íŠ¸ '''
 
     pass
 
