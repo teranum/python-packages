@@ -283,15 +283,15 @@ class KhAsync(KHOpenApiDispatch, QObject):
         return ret, msg
 
     async def RequestTrAsync(self, tr_cd: str, indata: dict
-                             , singleFields: list = []
-                             , multiFields: list = []
+                             , in_singles: list = []
+                             , in_multis: list = []
                              , cont_key: str = '') -> ResponseData:
         '''
         비동기 TR 요청 함수
         tr_cd : TR 코드
         indata : 입력값(딕셔너리)
-        singleFields : 가져올 단일데이터 리스트
-        multiFields : 가져올 멀티데이터 리스트
+        in_singles : 가져올 단일데이터 리스트
+        in_multis : 가져올 멀티데이터 리스트
 
         결과값 : ResponseData
         ResponseData : 결과값을 담은 객체
@@ -299,6 +299,9 @@ class KhAsync(KHOpenApiDispatch, QObject):
         ResponseData.msg : 에러메시지
         ResponseData.single_datas : 단일데이터 리스트
         ResponseData.multi_datas : 멀티데이터 리스트(2차원 리스트)
+        ResponseData.cont_key : 연속키
+        ResponseData.in_singles : 입력된 단일데이터 리스트
+        ResponseData.in_multis : 입력된 멀티데이터 리스트
 
         ※ 화면번호 자동할당(9950~9999)
         요청시 실시간연결은 자동해제
@@ -309,20 +312,23 @@ class KhAsync(KHOpenApiDispatch, QObject):
         scr_num = self.__get_request_scrNum();
 
         response = ResponseData()
+        response.tr_cd = tr_cd
+        response.in_singles = in_singles
+        response.in_multis = in_multis
 
         def inner_callback(sScrNo, sRQName, sTrCode, sRecordName, sPrevNext, nDataLength, sErrorCode, sMessage, sSplmMsg):
             self.DisconnectRealData(sScrNo)
             if sPrevNext == '2':
                 response.cont_key = '2'
-            if len(singleFields) > 0:
-                for field in singleFields:
+            if len(in_singles) > 0:
+                for field in in_singles:
                     response.single_datas.append(self.GetCommData(sTrCode, sRQName, 0, field).strip())
 
-            if len(multiFields) > 0:
+            if len(in_multis) > 0:
                 repeatCount = self.GetRepeatCnt(sTrCode, sRQName)
                 for i in range(repeatCount):
                     row = []
-                    for field in multiFields:
+                    for field in in_multis:
                         row.append(self.GetCommData(sTrCode, sRQName, i, field).strip())
                     response.multi_datas.append(row)
 
@@ -480,6 +486,7 @@ class KfAsync(KFOpenApiDispatch, QObject):
     '''
     키움증권 해외 API 비동기 처리 클래스
     '''
+
     OnReceiveTrData = pyqtSignal(str, str, str, str, str, int, str, str, str)
     OnReceiveMsg = pyqtSignal(str, str, str, str)
     OnEventConnect = pyqtSignal(int)
@@ -649,21 +656,24 @@ class KfAsync(KFOpenApiDispatch, QObject):
         return ret, msg
 
     async def RequestTrAsync(self, tr_cd: str, indata: dict
-                            , singleFields: list = []
-                            , multiFields: list = []
+                            , in_singles: list = []
+                            , in_multis: list = []
                             , cont_key: str = '') -> ResponseData:
         '''
         비동기 간편 TR 요청 함수
         tr_cd : TR 코드
         indata : 입력값(딕셔너리)
-        singleFields: 가져올 단일데이터 필드 리스트
-        multiFields: 가져올 다중데이터 필드 리스트
+        in_singles: 가져올 단일데이터 필드 리스트
+        in_multis: 가져올 다중데이터 필드 리스트
 
         결과값 : ResponseData객체
         ResponseData.result_code : 0 - 성공, 그외 - 실패
         ResponseData.msg : 에러메시지
         ResponseData.single_datas : 단일데이터
         ResponseData.multi_datas : 다중데이터(2차원 리스트)
+        ResponseData.cont_key : 연속키
+        ResponseData.in_singles : 입력된 단일데이터 리스트
+        ResponseData.in_multis : 입력된 멀티데이터 리스트
 
         ※ 화면번호 자동할당(9950~9999)
         요청시 실시간연결은 자동해제
@@ -675,19 +685,22 @@ class KfAsync(KFOpenApiDispatch, QObject):
             self.SetInputValue(key, value)
     
         response = ResponseData()
+        response.tr_cd = tr_cd
+        response.in_singles = in_singles
+        response.in_multis = in_multis
     
         def inner_callback(sScrNo, sRQName, sTrCode, sRecordName, sPrevNext, sMessage):
             self.DisconnectRealData(sScrNo)
             response.cont_key = sPrevNext
-            if singleFields is not None:
-                for field in singleFields:
+            if in_singles is not None:
+                for field in in_singles:
                     response.single_datas.append(self.GetCommData(sTrCode, sRQName, 0, field).strip())
     
-            if multiFields is not None:
+            if in_multis is not None:
                 repeatCount = self.GetRepeatCnt(sTrCode, sRQName)
                 for i in range(repeatCount):
                     row = []
-                    for field in multiFields:
+                    for field in in_multis:
                         row.append(self.GetCommData(sTrCode, sRQName, i, field).strip())
                     response.multi_datas.append(row)
     
