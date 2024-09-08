@@ -17,9 +17,11 @@ class KhAsync(KHOpenApiDispatch, QObject):
     OnReceiveTrCondition = pyqtSignal(str, str, str, int, int)
     OnReceiveConditionVer = pyqtSignal(int, str)
 
-    def __init__(self):
+    def __init__(self, ocx = None):
         super().__init__()
-        ocx = QAxWidget("KHOPENAPI.KHOpenAPICtrl.1")
+
+        if ocx is None:
+            ocx = QAxWidget("KHOPENAPI.KHOpenAPICtrl.1")
 
         # Connect signals
         ocx.OnReceiveTrData.connect(self.__inner_OnReceiveTrData)
@@ -491,9 +493,11 @@ class KfAsync(KFOpenApiDispatch, QObject):
     OnReceiveMsg = pyqtSignal(str, str, str, str)
     OnEventConnect = pyqtSignal(int)
 
-    def __init__(self):
+    def __init__(self, ocx = None):
         super().__init__()
-        ocx = QAxWidget("KFOPENAPI.KFOpenAPICtrl.1")
+
+        if ocx is None:
+            ocx = QAxWidget("KFOPENAPI.KFOpenAPICtrl.1")
 
         # Connect signals
         ocx.OnReceiveTrData.connect(self.__inner_OnReceiveTrData)
