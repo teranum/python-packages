@@ -101,17 +101,10 @@ class KhAsync(KHOpenApiDispatch, QObject):
         self._asyncNodes = []
 
     def __inner_OnReceiveTrData(self, sScrNo, sRQName, sTrCode, sRecordName, sPrevNext, nDataLength, sErrorCode, sMessage, sSplmMsg):
-        hashid = _asyncNode.get_hash_id(sRQName, "SendOrderAsync", sScrNo)
-        for node in self._asyncNodes:
-            if node.hashid == hashid:
-                node.async_evented = True
-                if node.callback is not None:
-                    node.callback(sScrNo, sRQName, sTrCode, sRecordName, sPrevNext, nDataLength, sErrorCode, sMessage, sSplmMsg)
-                node.set()
-                return
+        hashid_order = _asyncNode.get_hash_id(sRQName, "SendOrderAsync", sScrNo)
         hashid = _asyncNode.get_hash_id(sRQName, sTrCode, sScrNo)
         for node in self._asyncNodes:
-            if node.hashid == hashid:
+            if node.hashid == hashid_order or node.hashid == hashid:
                 node.async_evented = True
                 if node.callback is not None:
                     node.callback(sScrNo, sRQName, sTrCode, sRecordName, sPrevNext, nDataLength, sErrorCode, sMessage, sSplmMsg)
@@ -120,12 +113,13 @@ class KhAsync(KHOpenApiDispatch, QObject):
         self.OnReceiveTrData.emit(sScrNo, sRQName, sTrCode, sRecordName, sPrevNext, nDataLength, sErrorCode, sMessage, sSplmMsg)
 
     def __inner_OnReceiveMsg(self, sScrNo, sRQName, sTrCode, sMsg):
+        hashid_order = _asyncNode.get_hash_id(sRQName, "SendOrderAsync", sScrNo)
         hashid = _asyncNode.get_hash_id(sRQName, sTrCode, sScrNo)
         for node in self._asyncNodes:
-            if node.hashid == hashid:
+            if node.hashid == hashid_order or node.hashid == hashid:
                 node.async_evented = True
                 node.async_msg = sMsg
-            return
+                return
         self.OnReceiveMsg.emit(sScrNo, sRQName, sTrCode, sMsg)
 
     def __inner_OnEventConnect(self, err_code):
@@ -378,7 +372,7 @@ class KhAsync(KHOpenApiDispatch, QObject):
         if ret == 0:
             await node.wait(self.AsyncTimeOut)
             ret = node.async_result
-        if ret == 0 and response.msg != '':
+        if ret == 0 and response.msg == '':
             ret = -903 # 주문번호가 없습니다.
         self._asyncNodes.remove(node)
         msg = node.async_msg
@@ -403,7 +397,7 @@ class KhAsync(KHOpenApiDispatch, QObject):
         if ret == 0:
             await node.wait(self.AsyncTimeOut)
             ret = node.async_result
-        if ret == 0 and response.msg != '':
+        if ret == 0 and response.msg == '':
             ret = -903 # 주문번호가 없습니다.
         self._asyncNodes.remove(node)
         msg = node.async_msg
@@ -428,7 +422,7 @@ class KhAsync(KHOpenApiDispatch, QObject):
         if ret == 0:
             await node.wait(self.AsyncTimeOut)
             ret = node.async_result
-        if ret == 0 and response.msg != '':
+        if ret == 0 and response.msg == '':
             ret = -903 # 주문번호가 없습니다.
         self._asyncNodes.remove(node)
         msg = node.async_msg
@@ -544,17 +538,10 @@ class KfAsync(KFOpenApiDispatch, QObject):
         self._asyncNodes: list[_asyncNode] = []
 
     def __inner_OnReceiveTrData(self, sScrNo, sRQName, sTrCode, sRecordName, sPrevNext, sMessage):
-        hashid = _asyncNode.get_hash_id(sRQName, "SendOrderAsync", sScrNo)
-        for node in self._asyncNodes:
-            if node.hashid == hashid:
-                node.async_evented = True
-                if node.callback is not None:
-                    node.callback(sScrNo, sRQName, sTrCode, sRecordName, sPrevNext, sMessage)
-                node.set()
-                return
+        hashid_order = _asyncNode.get_hash_id(sRQName, "SendOrderAsync", sScrNo)
         hashid = _asyncNode.get_hash_id(sRQName, sTrCode, sScrNo)
         for node in self._asyncNodes:
-            if node.hashid == hashid:
+            if node.hashid == hashid_order or node.hashid == hashid:
                 node.async_evented = True
                 if node.callback is not None:
                     node.callback(sScrNo, sRQName, sTrCode, sRecordName, sPrevNext, sMessage)
@@ -563,9 +550,10 @@ class KfAsync(KFOpenApiDispatch, QObject):
         self.OnReceiveTrData.emit(sScrNo, sRQName, sTrCode, sRecordName, sPrevNext, sMessage)
 
     def __inner_OnReceiveMsg(self, sScrNo, sRQName, sTrCode, sMsg):
+        hashid_order = _asyncNode.get_hash_id(sRQName, "SendOrderAsync", sScrNo)
         hashid = _asyncNode.get_hash_id(sRQName, sTrCode, sScrNo)
         for node in self._asyncNodes:
-            if node.hashid == hashid:
+            if node.hashid == hashid_order or node.hashid == hashid:
                 node.async_evented = True
                 node.async_msg = sMsg
             return
@@ -651,7 +639,7 @@ class KfAsync(KFOpenApiDispatch, QObject):
         if ret == 0:
             await node.wait(self.AsyncTimeOut)
             ret = node.async_result
-        if ret == 0 and response.msg != '':
+        if ret == 0 and response.msg == '':
             ret = -903
         self._asyncNodes.remove(node)
         msg = node.async_msg
