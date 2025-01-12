@@ -6,16 +6,16 @@
     "t1485" : "/indtp/market-data",
     "t1511" : "/indtp/market-data",
     "t1516" : "/indtp/market-data",
-            
+
     # [업종] 차트
-    "t4203" : "	/indtp/chart",
-    "t8417" : "	/indtp/chart",
-    "t8418" : "	/indtp/chart",
-    "t8419" : "	/indtp/chart",
-            
+    "t4203" : "/indtp/chart",
+    "t8417" : "/indtp/chart",
+    "t8418" : "/indtp/chart",
+    "t8419" : "/indtp/chart",
+
     # [업종] 실시간 시세
     "BM_" : "/websocket",
-            
+
     # [주식] 시세
     "t1101" : "/stock/market-data",
     "t1102" : "/stock/market-data",
@@ -40,12 +40,12 @@
     "t1488" : "/stock/market-data",
     "t8407" : "/stock/market-data",
     "t9945" : "/stock/market-data",
-            
+
     # [주식] 거래원
     "t1752" : "/stock/exchange",
     "t1764" : "/stock/exchange",
     "t1771" : "/stock/exchange",
-            
+
     # [주식] 투자정보
     "t3102" : "/stock/investinfo",
     "t3202" : "/stock/investinfo",
@@ -55,7 +55,7 @@
     "t3518" : "/stock/investinfo",
     "t3521" : "/stock/investinfo",
     "t8428" : "/stock/investinfo",
-            
+
     # [주식] 프로그램
     "t1631" : "/stock/program",
     "t1632" : "/stock/program",
@@ -64,7 +64,7 @@
     "t1637" : "/stock/program",
     "t1640" : "/stock/program",
     "t1662" : "/stock/program",
-            
+
     # [주식] 투자자
     "t1601" : "/stock/investor",
     "t1602" : "/stock/investor",
@@ -73,12 +73,12 @@
     "t1617" : "/stock/investor",
     "t1621" : "/stock/investor",
     "t1664" : "/stock/investor",
-            
+
     # [주식] 외인/기관
     "t1702" : "/stock/frgr-itt",
     "t1716" : "/stock/frgr-itt",
     "t1717" : "/stock/frgr-itt",
-            
+
     # [주식] ELW
     "t1950" : "/stock/elw",
     "t1951" : "/stock/elw",
@@ -100,21 +100,21 @@
     "t9905" : "/stock/elw",
     "t9907" : "/stock/elw",
     "t9942" : "/stock/elw",
-            
+
     # [주식] ETF
     "t1901" : "/stock/etf",
     "t1902" : "/stock/etf",
     "t1903" : "/stock/etf",
     "t1904" : "/stock/etf",
     "t1906" : "/stock/etf",
-            
+
     # [주식] 섹터
     "t1531" : "/stock/sector",
     "t1532" : "/stock/sector",
     "t1533" : "/stock/sector",
     "t1537" : "/stock/sector",
     "t8425" : "/stock/sector",
-            
+
     # [주식] 종목검색
     "t1809" : "/stock/item-search",
     "t1825" : "/stock/item-search",
@@ -122,7 +122,7 @@
     "t1866" : "/stock/item-search",
     "t1859" : "/stock/item-search",
     "t1860" : "/stock/item-search",
-            
+
     # [주식] 상위종목
     "t1441" : "/stock/high-item",
     "t1444" : "/stock/high-item",
@@ -133,13 +133,13 @@
     "t1482" : "/stock/high-item",
     "t1489" : "/stock/high-item",
     "t1492" : "/stock/high-item",
-            
+
     # [주식] 차트
     "t1665" : "/stock/chart",
     "t8410" : "/stock/chart",
     "t8411" : "/stock/chart",
     "t8412" : "/stock/chart",
-            
+
     # [주식] 기타
     "CLNAQ00100" : "/stock/etc",
     "t1403" : "/stock/etc",
@@ -151,7 +151,7 @@
     "t1941" : "/stock/etc",
     "t8430" : "/stock/etc",
     "t8436" : "/stock/etc",
-            
+
     # [주식] 계좌
     "CDPCQ04700" : "/stock/accno",
     "CSPAQ00600" : "/stock/accno",
@@ -165,12 +165,12 @@
     "t0151" : "/stock/accno",
     "t0424" : "/stock/accno",
     "t0425" : "/stock/accno",
-            
+
     # [주식] 주문
     "CSPAT00601" : "/stock/order",
     "CSPAT00701" : "/stock/order",
     "CSPAT00801" : "/stock/order",
-            
+
     # [주식] 실시간 시세
     "B7_" : "/websocket",
     "DH1" : "/websocket",
@@ -217,7 +217,7 @@
     "s4_" : "/websocket",
     "Ys3" : "/websocket",
     "AFR" : "/websocket",
-            
+
     # [선물/옵션] 시세
     "t2101" : "/futureoption/market-data",
     "t2105" : "/futureoption/market-data",
@@ -248,20 +248,21 @@
     "t8437" : "/futureoption/market-data",
     "t9943" : "/futureoption/market-data",
     "t9944" : "/futureoption/market-data",
-            
+
     # [선물/옵션] 투자자
     "t2541" : "/futureoption/investor",
     "t2545" : "/futureoption/investor",
-            
+
     # [선물/옵션] 차트
     "t2209" : "/futureoption/chart",
     "t8414" : "/futureoption/chart",
     "t8415" : "/futureoption/chart",
     "t8416" : "/futureoption/chart",
     "t8429" : "/futureoption/chart",
-            
+
     # [선물/옵션] 계좌
     "CFOAQ00600" : "/futureoption/accno",
+    "CFOAQ50600" : "/futureoption/accno",
     "CFOAQ10100" : "/futureoption/accno",
     "CFOBQ10500" : "/futureoption/accno",
     "CFOEQ11100" : "/futureoption/accno",
@@ -275,7 +276,7 @@
     "CEXAQ31200" : "/futureoption/accno",
     "CEXAQ44200" : "/futureoption/accno",
     "FOCCQ33700" : "/futureoption/accno",
-            
+
     # [선물/옵션] 주문
     "CFOAT00100" : "/futureoption/order",
     "CFOAT00200" : "/futureoption/order",
@@ -284,10 +285,10 @@
     "CEXAT11100" : "/futureoption/order",
     "CEXAT11200" : "/futureoption/order",
     "CEXAT11300" : "/futureoption/order",
-            
+
     # [선물/옵션] 기타
     "MMDAQ91200" : "/futureoption/etc",
-            
+
     # [선물/옵션] 실시간 시세
     "C01" : "/websocket",
     "CD0" : "/websocket",
@@ -315,7 +316,7 @@
     "YFC" : "/websocket",
     "YJC" : "/websocket",
     "YOC" : "/websocket",
-            
+
     # [해외선물] 시세
     "o3101" : "/overseas-futureoption/market-data",
     "o3104" : "/overseas-futureoption/market-data",
@@ -331,7 +332,7 @@
     "o3128" : "/overseas-futureoption/market-data",
     "o3136" : "/overseas-futureoption/market-data",
     "o3137" : "/overseas-futureoption/market-data",
-            
+
     # [해외선물] 계좌
     "CIDBQ01400" : "/overseas-futureoption/accno",
     "CIDBQ01500" : "/overseas-futureoption/accno",
@@ -340,18 +341,18 @@
     "CIDBQ03000" : "/overseas-futureoption/accno",
     "CIDBQ05300" : "/overseas-futureoption/accno",
     "CIDEQ00800" : "/overseas-futureoption/accno",
-            
+
     # [해외선물] 주문
     "CIDBT00100" : "/overseas-futureoption/order",
     "CIDBT00900" : "/overseas-futureoption/order",
     "CIDBT01000" : "/overseas-futureoption/order",
-            
+
     # [해외선물] 차트
     "o3103" : "/overseas-futureoption/chart",
     "o3108" : "/overseas-futureoption/chart",
     "o3117" : "/overseas-futureoption/chart",
     "o3139" : "/overseas-futureoption/chart",
-            
+
     # [해외선물] 실시간 시세
     "OVC" : "/websocket",
     "OVH" : "/websocket",
@@ -360,14 +361,14 @@
     "TC1" : "/websocket",
     "TC2" : "/websocket",
     "TC3" : "/websocket",
-            
+
     # [기타] 시간조회
     "t0167" : "/etc/time-search",
-            
+
     # [기타] 실시간 시세
     "JIF" : "/websocket",
     "NWS" : "/websocket",
-            
+
     # [실시간 시세 투자정보] 투자정보
     "BMT" : "/websocket",
     "CUR" : "/websocket",
