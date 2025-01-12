@@ -20,3 +20,9 @@
         ''' 입력된 단일 데이터 리스트 '''
         self.in_multis = []
         ''' 입력된 다중 데이터 리스트 '''
+
+        self.request_time: float = 0.0
+        ''' 요청시간 '''
+        self.elapsed_ms: float = 0.0
+        ''' 요청/응답 소요시간 (ms) '''
+

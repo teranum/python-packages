@@ -1,10 +1,10 @@
 [build-system]
-requires = ["hatchling"]
+requires = ["hatchling==1.26.3"]
 build-backend = "hatchling.build"
 
 [project]
 name = "kiwoomAsync"
-version = "0.0.7"
+version = "0.0.8"
 authors = [
   { name="teranum", email="teranum@gmail.com" },
 ]
@@ -24,5 +24,4 @@ dependencies = [
 
 [project.urls]
 Homepage = "https://github.com/teranum/python-packages/tree/master/kiwoomAsync"
-Issues = "https://github.com/teranum/python-packages/issues"
 

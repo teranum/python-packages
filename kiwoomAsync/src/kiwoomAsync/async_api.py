@@ -1,10 +1,11 @@
-﻿import asyncio
+﻿import asyncio, time
+
 from PyQt5.QAxContainer import QAxWidget
 from PyQt5.QtCore import QObject, pyqtSignal
 
-from kiwoomAsync.kh_dispatch import KHOpenApiDispatch
-from kiwoomAsync.kf_dispatch import KFOpenApiDispatch
-from kiwoomAsync.models import ResponseData
+from .kh_dispatch import KHOpenApiDispatch
+from .kf_dispatch import KFOpenApiDispatch
+from .models import ResponseData
 
 class KhAsync(KHOpenApiDispatch, QObject):
     '''
@@ -97,7 +98,7 @@ class KhAsync(KHOpenApiDispatch, QObject):
 
         # Register properties
         self.ocx = ocx
-        self.AsyncTimeOut = 10
+        self.AsyncTimeOut = 5
         self._asyncNodes = []
 
     def __inner_OnReceiveTrData(self, sScrNo, sRQName, sTrCode, sRecordName, sPrevNext, nDataLength, sErrorCode, sMessage, sSplmMsg):
@@ -173,6 +174,9 @@ class KhAsync(KHOpenApiDispatch, QObject):
         결과값 : (ret, msg)
         ret : 0 - 성공, 그외 - 실패, msg : 에러메시지
         '''
+        if self.GetConnectState() == 1:
+            return 0, '이미 로그인 되어 있습니다'
+
         hashid = _asyncNode.get_hash_id("CommConnectAsync")
         # Check if the same request is already in the list
         for node in self._asyncNodes:
@@ -241,6 +245,9 @@ class KhAsync(KHOpenApiDispatch, QObject):
         결과값 : (ret, msg)
         ret : 0 - 성공, 그외 - 실패, msg : 에러메시지
         '''
+        if self.GetConnectState() == 0:
+            return -10, self.GetErrorMesage(-10)
+
         hashid = _asyncNode.get_hash_id(sRQName, sTrCode, sScreenNo)
         # Create a new node
         node = _asyncNode(hashid)
@@ -263,7 +270,11 @@ class KhAsync(KHOpenApiDispatch, QObject):
         결과값 : (ret, msg)
         ret : 0 - 성공, 그외 - 실패, msg : 에러메시지
         '''
-        hashid = _asyncNode.get_hash_id(sRQName, "OPTKWFID", screenNo)
+        if self.GetConnectState() == 0:
+            return -10, self.GetErrorMesage(-10)
+
+        tr_cd = "OPTKWFID" if typeFlag == 0 else "OPTFOFID"
+        hashid = _asyncNode.get_hash_id(sRQName, tr_cd, screenNo)
         # Create a new node
         node = _asyncNode(hashid)
         node.callback = callback
@@ -305,7 +316,7 @@ class KhAsync(KHOpenApiDispatch, QObject):
         관심종목요청은 OPTKWFID로 요청, indata에 "종목코드", "타입구분"을 설정
 
         '''
-        scr_num = self.__get_request_scrNum();
+        scr_num = self.__get_request_scrNum()
 
         response = ResponseData()
         response.tr_cd = tr_cd
@@ -330,10 +341,9 @@ class KhAsync(KHOpenApiDispatch, QObject):
 
         if tr_cd == "OPTKWFID": # 관심종목정보요청
             종목코드 = indata.get("종목코드")
-            타입구분 = indata.get("타입구분")
-            if 종목코드 is None or 타입구분 is None:
+            if 종목코드 is None:
                 response.result_code = -300
-                response.msg = "관심요청 입력값 오류: 종목코드, 타입구분을 설정해주세요"
+                response.msg = "관심요청 입력값 오류: 종목코드를 설정해주세요"
                 return response
             codes = 종목코드.split(';')
             # 빈문자열 제거
@@ -344,7 +354,11 @@ class KhAsync(KHOpenApiDispatch, QObject):
                 return response
             # ';'로 구분된 종목코드를 다시 연결
             종목코드 = ';'.join(codes)
-            (response.result_code, response.msg) = await self.CommKwRqDataAsync(종목코드, 0, len(codes), 타입구분, "관심종목정보요청", scr_num, inner_callback)
+            request_time = time.time()
+            start_time = time.perf_counter_ns()
+            (response.result_code, response.msg) = await self.CommKwRqDataAsync(종목코드, 0, len(codes), 0, "관심종목정보요청", scr_num, inner_callback)
+            response.request_time = request_time
+            response.elapsed_ms = (time.perf_counter_ns() - start_time) / 1000000
             return response
 
         # TR 입력값 설정
@@ -352,7 +366,11 @@ class KhAsync(KHOpenApiDispatch, QObject):
             self.SetInputValue(key, value)
 
         # TR 요청
+        request_time = time.time()
+        start_time = time.perf_counter_ns()
         (response.result_code, response.msg) = await self.CommRqDataAsync(tr_cd, tr_cd, 2 if cont_key == '2' else 0, scr_num, inner_callback)
+        response.request_time = request_time
+        response.elapsed_ms = (time.perf_counter_ns() - start_time) / 1000000
         return response
 
     async def SendOrderAsync(self, sRQName: str, sScreenNo: str, sAccNo: str, nOrderType: int, sCode: str, nQty: int, nPrice: int, sHogaGb: str, sOrgOrderNo: str) -> tuple[int, str]:
@@ -671,7 +689,7 @@ class KfAsync(KFOpenApiDispatch, QObject):
         요청시 실시간연결은 자동해제
         출력데이터는 strip 처리하여 반환
         '''
-        scr_num = self.__get_request_scrNum();
+        scr_num = self.__get_request_scrNum()
     
         for key, value in indata.items():
             self.SetInputValue(key, value)
@@ -696,7 +714,11 @@ class KfAsync(KFOpenApiDispatch, QObject):
                         row.append(self.GetCommData(sTrCode, sRQName, i, field).strip())
                     response.multi_datas.append(row)
     
+        request_time = time.time()
+        start_time = time.perf_counter_ns()
         (response.result_code, response.msg) = await self.CommRqDataAsync(tr_cd, tr_cd, cont_key, scr_num, inner_callback)
+        response.request_time = request_time
+        response.elapsed_ms = (time.perf_counter_ns() - start_time) / 1000000
         return response
 
     def GetErrorMesage(self, err_code: int) -> str:
