@@ -1,5 +1,5 @@
 ﻿tr_code_to_path:dict = {
-            
+
     # [업종] 시세
     "t1514" : "/indtp/market-data",
     "t8424" : "/indtp/market-data",
@@ -39,6 +39,8 @@
     "t1486" : "/stock/market-data",
     "t1488" : "/stock/market-data",
     "t8407" : "/stock/market-data",
+    "t8450" : "/stock/market-data",
+    "t8454" : "/stock/market-data",
     "t9945" : "/stock/market-data",
 
     # [주식] 거래원
@@ -119,6 +121,7 @@
     "t1809" : "/stock/item-search",
     "t1825" : "/stock/item-search",
     "t1826" : "/stock/item-search",
+    "t1856" : "/stock/item-search",
     "t1866" : "/stock/item-search",
     "t1859" : "/stock/item-search",
     "t1860" : "/stock/item-search",
@@ -139,6 +142,9 @@
     "t8410" : "/stock/chart",
     "t8411" : "/stock/chart",
     "t8412" : "/stock/chart",
+    "t8451" : "/stock/chart",
+    "t8452" : "/stock/chart",
+    "t8453" : "/stock/chart",
 
     # [주식] 기타
     "CLNAQ00100" : "/stock/etc",
@@ -216,6 +222,26 @@
     "s3_" : "/websocket",
     "s4_" : "/websocket",
     "Ys3" : "/websocket",
+    "NS3" : "/websocket",
+    "NH1" : "/websocket",
+    "NS2" : "/websocket",
+    "NYS" : "/websocket",
+    "NVI" : "/websocket",
+    "NK1" : "/websocket",
+    "NPH" : "/websocket",
+    "NPM" : "/websocket",
+    "NBT" : "/websocket",
+    "NBM" : "/websocket",
+    "US3" : "/websocket",
+    "UH1" : "/websocket",
+    "US2" : "/websocket",
+    "UYS" : "/websocket",
+    "UPH" : "/websocket",
+    "UK1" : "/websocket",
+    "UBT" : "/websocket",
+    "UBM" : "/websocket",
+    "UPM" : "/websocket",
+    "UVI" : "/websocket",
     "AFR" : "/websocket",
 
     # [선물/옵션] 시세
@@ -362,6 +388,40 @@
     "TC2" : "/websocket",
     "TC3" : "/websocket",
 
+    # [해외주식] 계좌
+    "COSAQ00102" : "/overseas-stock/accno",
+    "COSAQ01400" : "/overseas-stock/accno",
+    "COSOQ00201" : "/overseas-stock/accno",
+    "COSOQ02701" : "/overseas-stock/accno",
+
+    # [해외주식] 시세
+    "g3101" : "/overseas-stock/market-data",
+    "g3102" : "/overseas-stock/market-data",
+    "g3104" : "/overseas-stock/market-data",
+    "g3106" : "/overseas-stock/market-data",
+    "g3190" : "/overseas-stock/market-data",
+
+    # [해외주식] 실시간 시세
+    "AS0" : "/websocket",
+    "AS1" : "/websocket",
+    "AS2" : "/websocket",
+    "AS3" : "/websocket",
+    "AS4" : "/websocket",
+    "GSH" : "/websocket",
+    "GSC" : "/websocket",
+
+    # [해외주식] 주문
+    "COSAT00301" : "/overseas-stock/order",
+    "COSAT00311" : "/overseas-stock/order",
+    "COSMT00300" : "/overseas-stock/order",
+    "COSAT00400" : "/overseas-stock/order",
+
+    # [해외주식] 차트
+    "g3103" : "/overseas-stock/chart",
+    "g3202" : "/overseas-stock/chart",
+    "g3203" : "/overseas-stock/chart",
+    "g3204" : "/overseas-stock/chart",
+
     # [기타] 시간조회
     "t0167" : "/etc/time-search",
 
@@ -373,4 +433,5 @@
     "BMT" : "/websocket",
     "CUR" : "/websocket",
     "MK2" : "/websocket",
+
 }
