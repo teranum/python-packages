@@ -1,0 +1,25 @@
+[build-system]
+requires = ["hatchling==1.26.3"]
+build-backend = "hatchling.build"
+
+[project]
+name = "kiwoomRestapi"
+version = "0.0.1"
+authors = [
+  { name="teranum", email="teranum@gmail.com" },
+]
+description = "package for Kiwoom RestAPI"
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+  "aiohttp",
+]
+
+[project.urls]
+Homepage = "https://github.com/teranum/python-packages/tree/master/kiwoomRestapi"
+
