@@ -1,11 +1,11 @@
-﻿# kiwoomRestapi Package
+﻿# kiwoomRest Package
 
 키움증권 REST API 간편이용 패키지.
 
 ## Installation
 
 ```bash
-pip install kiwoomRestapi
+pip install kiwoomRest
 ```
 
 ## Usage
@@ -16,7 +16,7 @@ Samples: https://github.com/teranum/kiwoom-restapi-samples
 ### 로그인 요청은 반드시 먼저 수행되어야 하며, 로그인이 성공하면 다른 요청을 수행할 수 있습니다.
 ```python
 import asyncio
-from kiwoomRestapi import KwRestApi
+from kiwoomRest import KwRestApi
 from app_keys import appkey, secretkey # app_keys.py 파일에 appkey, secretkey 변수를 정의하고 사용하세요
 
 async def main():

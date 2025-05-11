@@ -18,7 +18,7 @@ Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "dbopenapi", "dbopenapi\dbop
 EndProject
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "kiwoomAsync", "kiwoomAsync\kiwoomAsync.pyproj", "{7ECDF082-CD79-47E1-8087-B122F33E88ED}"
 EndProject
-Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "kiwoomRestapi", "kiwoomRestapi\kiwoomRestapi.pyproj", "{92F3402C-39D3-4765-91A9-4FC17CFA14DE}"
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "kiwoomRest", "kiwoomRest\kiwoomRest.pyproj", "{92F3402C-39D3-4765-91A9-4FC17CFA14DE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

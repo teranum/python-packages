@@ -28,12 +28,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="src\" />
-    <Folder Include="src\kiwoomRestapi\" />
+    <Folder Include="src\kiwoomRest\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="src\kiwoomRestapi\rest_api.py" />
-    <Compile Include="src\kiwoomRestapi\tr_code_to_path.py" />
-    <Compile Include="src\kiwoomRestapi\__init__.py" />
+    <Compile Include="src\kiwoomRest\rest_api.py" />
+    <Compile Include="src\kiwoomRest\tr_code_to_path.py" />
+    <Compile Include="src\kiwoomRest\__init__.py" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
