@@ -11,7 +11,6 @@ pip install kiwoomRest
 ## Usage
 모든 요청은 비동기로 처리되며, 요청에 대한 응답은 await 키워드를 사용하여 받을 수 있습니다.
 <BR/>
-Samples: https://github.com/teranum/kiwoom-restapi-samples
 
 ### 로그인 요청은 반드시 먼저 수행되어야 하며, 로그인이 성공하면 다른 요청을 수행할 수 있습니다.
 ```python
