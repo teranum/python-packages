@@ -12,6 +12,8 @@ BASE_URL_REAL = "https://api.kiwoom.com"
 BASE_URL_SIMUL = "https://mockapi.kiwoom.com"
 WSS_URL_REAL = "wss://api.kiwoom.com:10000/api/dostk/websocket"
 WSS_URL_SIMULATION = "wss://mockapi.kiwoom.com:10000/api/dostk/websocket"
+WSS_URL_US_REAL = "wss://api.kiwoom.com:10000/api/us/websocket"
+WSS_URL_US_SIMULATION = "wss://mockapi.kiwoom.com:10000/api/us/websocket"
 
 from .tr_code_to_path import tr_code_to_path
 
@@ -97,8 +99,10 @@ class KwRestApi(object):
         self._http = None
         self._websocket = None
         self._base_url:str = ""
+        self._wss_url:str = ""
         self._connected:bool = False
         self._is_simulation:bool = False
+        self._is_us:bool = False
         self._last_message:str = ""
         self._timeout = 5
         self._last_response_value = None
@@ -127,6 +131,15 @@ class KwRestApi(object):
         A readonly property.
         """
         return self._is_simulation
+
+    @property
+    def is_us(self) -> bool:
+        """미국주식 서버 여부
+        True: 미국주식, False: 국내주식
+
+        A readonly property.
+        """
+        return self._is_us
 
     @property
     def last_message(self) -> str:
@@ -188,12 +201,13 @@ class KwRestApi(object):
         if self._http and not self._http.closed:
             await self._http.close()
 
-    async def login(self, appkey:str, secretkey:str, is_simulation:bool = False) -> bool:
+    async def login(self, appkey:str, secretkey:str, is_simulation:bool = False, is_us:bool = False) -> bool:
         '''
         로그인 요청
         appkey: 앱키
         secretkey: 앱시크릿키
         is_simulation: 모의투자 로그인 시 True, 실투자 로그인 시 False (default)
+        is_us: 미국 주식 로그인 시 True, 국내 주식 로그인 시 False (default)
         return: True: 성공, False: 실패, 실패시 last_message에 실패사유가 저장됨
         '''
         if self._connected :
@@ -205,7 +219,9 @@ class KwRestApi(object):
             return False
     
         self._is_simulation = is_simulation
+        self._is_us = is_us
         self._base_url = BASE_URL_SIMUL if self._is_simulation else BASE_URL_REAL
+        self._wss_url = WSS_URL_US_SIMULATION if self._is_simulation and self._is_us else WSS_URL_US_REAL if self._is_us else WSS_URL_SIMULATION if self._is_simulation else WSS_URL_REAL
 
         timeout = aiohttp.ClientTimeout(total=10) # 10초 타임아웃
         self._http = aiohttp.ClientSession(timeout=timeout)
@@ -221,7 +237,7 @@ class KwRestApi(object):
             self._access_token = token
             # 웹소켓 연결/인증요청
             try:
-                websocket = await  self._http.ws_connect(WSS_URL_SIMULATION if self._is_simulation else WSS_URL_REAL)
+                websocket = await  self._http.ws_connect(self._wss_url)
                 if not websocket.closed:
                     self._websocket = websocket
                     asyncio.create_task(self._websocket_listen())
@@ -239,6 +255,7 @@ class KwRestApi(object):
         else:
             self._last_message = response.return_msg
         await self.close()
+        self._connected = False
         return False
 
     async def request(self
@@ -271,6 +288,13 @@ class KwRestApi(object):
             "trnm" : "CNSRLST"
         }
         response = await api.request("ka10171", inputs)
+        print(response)
+
+        # 미국주식 조건검색식 목록 조회
+        inputs = {
+            "trnm" : "GCNSRLST"
+        }
+        response = await api.request("usa20280", inputs)
         print(response)
         '''
         result = ResponseData(api_id)
@@ -355,7 +379,7 @@ class KwRestApi(object):
         inputs["trnm"] = "REMOVE"
         response = await api.realtime(inputs)
         '''
-        return self.request("realtime", indatas, path="/api/dostk/websocket", cont_yn="")
+        return self.request("realtime", indatas, path="/websocket")
 
     async def ws_sendmessage(self, text:str) -> bool:
         '''
@@ -422,10 +446,12 @@ class KwRestApi(object):
                             continue
                         # check async node
                         if self._ws_asyncnode != None and self._ws_asyncnode.hashid == trnm:
-                            # setting jsondata, set event
-                            self._ws_asyncnode.jsondata = jsondata
-                            self._ws_asyncnode.set()
-                            continue
+                            return_code = jsondata.get("return_code", -999)
+                            if return_code != -999:
+                                # setting jsondata, set event
+                                self._ws_asyncnode.jsondata = jsondata
+                                self._ws_asyncnode.set()
+                                continue
                     # raise event
                     await self._on_realtime.emit_signal(jsondata)
                 except Exception as e:

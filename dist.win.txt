@@ -12,11 +12,11 @@ py -m build
 
 
 3. test install
-pip install dist/*
+py -m pip install (Get-Item dist\*.whl)
 
 
 4. test uninstall
-pip uninstall package_name
+py -m pip uninstall package_name
 
 
 5. upload to pypi
